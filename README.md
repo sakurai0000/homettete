@@ -1,24 +1,29 @@
-# README
+# hometette!（褒めてって！）
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+<日常生活の些細な頑張りを褒められたい！褒めたい！そんな小さな思いを叶えるための優しいSNSです>
 
-Things you may want to cover:
+### テーマを選んだ理由
+<・年齢を重ねるにつれ他人をほめられるor褒めるという行為が減ってしまった気がするのでもっと気楽に褒められたい、そして褒める場があったら楽しくなるだろうと考えた為
+・また、どうしてこのアプリなの？と面接官の興味を惹けて話題が広げやすいテーマだと思った
+>
 
-* Ruby version
+### ターゲットユーザ
+<12歳～の老若男女問わず幅広い方々に楽しんでほしいアプリ>
 
-* System dependencies
+### 主な利用シーン
+<朝起きた時や寝る前、またはちょっとした空き時間などに>
 
-* Configuration
+## 設計書
+<...>
 
-* Database creation
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 使用素材
+Font Awesome
