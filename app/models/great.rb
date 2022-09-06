@@ -1,0 +1,2 @@
+class Great < ApplicationRecord
+end

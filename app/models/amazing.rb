@@ -1,0 +1,2 @@
+class Amazing < ApplicationRecord
+end
