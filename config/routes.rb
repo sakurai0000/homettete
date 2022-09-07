@@ -13,6 +13,8 @@ devise_for :users,skip: [:passwords], controllers: {
 
  scope module: :public do
   root to: 'homes#top'
+  resources :posts, only: [:new, :create, :index, :show, :destroy]
+  resources :users, only: [:show, :edit]
  end
 
 
