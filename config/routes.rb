@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
 # 管理者用
 devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
@@ -13,8 +13,14 @@ devise_for :users,skip: [:passwords], controllers: {
 
  scope module: :public do
   root to: 'homes#top'
-  resources :posts, only: [:new, :create, :index, :show, :destroy]
-  resources :users, only: [:show, :edit]
+  resources :posts, only: [:new, :create, :index, :show, :destroy]do
+   resources :likes, only: [:create, :destroy, :index]
+   resources :greats, only: [:create, :destroy, :index]
+   resources :amazings, only: [:create, :destroy, :index]
+   resources :comments, only: [:create, :destroy]
+  end
+
+  resources :users, only: [:show, :edit, :update]
  end
 
 

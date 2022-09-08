@@ -16,6 +16,20 @@ class Post < ApplicationRecord
     #end
     image
   end
+  
+  def liked_by?(user)
+    likes.exists?(user_id: user.id)
+  end
+
+  def greatd_by?(user)
+    greats.exists?(user_id: user.id)
+  end
+  
+  def amazingd_by?(user)
+    amazings.exists?(user_id: user.id)
+  end
+
+
 
 
 end

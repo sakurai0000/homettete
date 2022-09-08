@@ -1,9 +1,93 @@
-<div>
-  <%= image_tag @post.get_image %>
-  <p>説明：<%= @post.post %></p>
-  <p>投稿ユーザー画像：<%= image_tag @post.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+<div class="card-list-container py-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+   <% if @post.get_image.attached? %>
+    <%= image_tag @post.get_image %>
+   <% end %>
+      <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+    <%= image_tag @post.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+    </div>
+  <div class="col-10">
+     <p class="card-title">
+  <%= @post.post %>
+     </p>
+  <span><i class="fas fa-user"></i> By <%= @post.user.name %></p>
+  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %>｜ </span>
   <% if @post.user == current_user %>
-    <%= link_to "削除",  posts_path(@post), method: :delete %>
+    <%= link_to "削除",  post_path(@post), class: "btn btn-secondary" , method: :delete %>
+      <% end %>
+      
+      
+      <div>
+  <p>コメント件数：<%= @post.comments.count %></p>
+  <% @post.comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <%= post_comment.user.name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete %>
+    <% end %>
+ <% end %>
+</div>
+
+
+  <% if @post. liked_by?(current_user) %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> いいね
+      <% end %>
+    </p>
   <% end %>
+  
+  
+  <% if @post. greatd_by?(current_user) %>
+    <p>
+      <%= link_to post_greats_path(@post), method: :delete do %>
+        ♥<%= @post.greats.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_greats_path(@post), method: :post do %>
+        ♡<%= @post.greats.count %> すごいね
+      <% end %>
+    </p>
+  <% end %>
+  
+  
+  
+  <% if @post. amazingd_by?(current_user) %>
+    <p>
+      <%= link_to post_amazings_path(@post), method: :delete do %>
+        ♥<%= @post.amazings.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to post_amazings_path(@post), method: :post do %>
+        ♡<%= @post.amazings.count %> えらいね
+      <% end %>
+    </p>
+  <% end %>
+
+
+
+<div>
+  <%= form_with model: [@post, @post_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+    </div>
+    </div>
+    </div>
+    </div>
+      </div>
+   </div>

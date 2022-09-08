@@ -3,23 +3,27 @@
  <div class="card w-50 mx-auto mt-4 shadow-lg">
 
   <% if posts.get_image.attached? %>
-    <%= image_tag posts.get_image %>
+  <%= link_to post_path(posts.id) do %>
+    <%= image_tag posts.get_image, class:"card-img-top"; %>
+   <% end %>
   <% end %>
    <div class="card-body">
       <div class="row">
         <div class="col-2">
-  <!--投稿ユーザー画像--><%= image_tag posts.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+  <!--投稿ユーザー画像-->
+  <%= image_tag posts.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
         </div>
     <div class="col-10">
-          <p class="card-title">
+          <p class="card-text">
             <%= link_to(post_path(posts.id), class:"text-dark") do %>
+             <%= posts.post %>
             <% end %>
           </p>
-  <p class="card-text">説明：<%= posts.post %></p>
   <span><i class="fas fa-user"></i> By <%= posts.user.name %>｜ </span>
          </div>
        </div>
     </div>
    </div>
 <% end %>
+<%= paginate @posts %>
 </div>
