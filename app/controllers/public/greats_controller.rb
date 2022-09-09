@@ -13,6 +13,13 @@ class Public::GreatsController < ApplicationController
     great.destroy
     redirect_to post_path(post)
   end
+  
+  def index
+    #binding.pry
+    @user = User.find(params[:post_id])
+    greats= Great.where(user_id: @user.id).pluck(:post_id)
+    @great_posts = Post.find(greats)
+  end
 
   
 end

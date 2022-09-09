@@ -20,6 +20,44 @@
             <% end %>
           </p>
   <span><i class="fas fa-user"></i> By <%= posts.user.name %>｜ </span>
+
+
+  <% if @post. liked_by?(current_user) %>
+      <span><%= link_to post_likes_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> いいね｜</span>
+      <% end %>
+    <% else %>
+     <span> <%= link_to post_likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> いいね｜</span>
+      <% end %>
+  <% end %>
+
+
+
+  <% if @post. amazingd_by?(current_user) %>
+       <span><%= link_to post_amazings_path(@post), method: :delete do %>
+        ♥<%= @post.amazings.count %> えらいね｜</span>
+      <% end %>
+    <% else %>
+       <span><%= link_to post_amazings_path(@post), method: :post do %>
+        ♡<%= @post.amazings.count %> えらいね｜</span>
+      <% end %>
+  <% end %>
+
+
+    <% if @post. greatd_by?(current_user) %>
+     <span> <%= link_to post_greats_path(@post), method: :delete do %>
+        ♥<%= @post.greats.count %> すごいね｜</span>
+      <% end %>
+    <% else %>
+      <span><%= link_to post_greats_path(@post), method: :post do %>
+        ♡<%= @post.greats.count %> すごいね｜</span>
+      <% end %>
+  <% end %>
+
+  <span> </span>
+
+
          </div>
        </div>
     </div>

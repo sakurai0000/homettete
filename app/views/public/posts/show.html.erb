@@ -12,13 +12,53 @@
      <p class="card-title">
   <%= @post.post %>
      </p>
-  <span><i class="fas fa-user"></i> By <%= @post.user.name %></p>
-  <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %>｜ </span>
-  <% if @post.user == current_user %>
-    <%= link_to "削除",  post_path(@post), class: "btn btn-secondary" , method: :delete %>
+  <span><i class="fas fa-user"></i> By <%= @post.user.name %>｜ </span>
+  <span><i class="fa fa-calendar"></i> <%= @post.created_at.strftime('%Y/%m/%d') %>｜ </span>
+
+
+
+  <% if @post. liked_by?(current_user) %>
+      <span><%= link_to post_likes_path(@post), method: :delete do %>
+        ♥<%= @post.likes.count %> いいね｜</span>
       <% end %>
-      
-      
+    <% else %>
+     <span> <%= link_to post_likes_path(@post), method: :post do %>
+        ♡<%= @post.likes.count %> いいね｜</span>
+      <% end %>
+  <% end %>
+
+
+
+  <% if @post. amazingd_by?(current_user) %>
+       <span><%= link_to post_amazings_path(@post), method: :delete do %>
+        ♥<%= @post.amazings.count %> えらいね｜</span>
+      <% end %>
+    <% else %>
+       <span><%= link_to post_amazings_path(@post), method: :post do %>
+        ♡<%= @post.amazings.count %> えらいね｜</span>
+      <% end %>
+  <% end %>
+  
+  
+    <% if @post. greatd_by?(current_user) %>
+     <span> <%= link_to post_greats_path(@post), method: :delete do %>
+        ♥<%= @post.greats.count %> すごいね｜</span>
+      <% end %>
+    <% else %>
+      <span><%= link_to post_greats_path(@post), method: :post do %>
+        ♡<%= @post.greats.count %> すごいね｜</span>
+      <% end %>
+  <% end %>
+  
+  <span> </span>
+  
+
+  <% if @post.user == current_user %>
+   <span> <%= link_to "削除",  post_path(@post), class: 'text-dark', method: :delete %></span>
+      <% end %>
+
+
+
       <div>
   <p>コメント件数：<%= @post.comments.count %></p>
   <% @post.comments.each do |post_comment| %>
@@ -30,53 +70,6 @@
     <% end %>
  <% end %>
 </div>
-
-
-  <% if @post. liked_by?(current_user) %>
-    <p>
-      <%= link_to post_likes_path(@post), method: :delete do %>
-        ♥<%= @post.likes.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_likes_path(@post), method: :post do %>
-        ♡<%= @post.likes.count %> いいね
-      <% end %>
-    </p>
-  <% end %>
-  
-  
-  <% if @post. greatd_by?(current_user) %>
-    <p>
-      <%= link_to post_greats_path(@post), method: :delete do %>
-        ♥<%= @post.greats.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_greats_path(@post), method: :post do %>
-        ♡<%= @post.greats.count %> すごいね
-      <% end %>
-    </p>
-  <% end %>
-  
-  
-  
-  <% if @post. amazingd_by?(current_user) %>
-    <p>
-      <%= link_to post_amazings_path(@post), method: :delete do %>
-        ♥<%= @post.amazings.count %> いいね
-      <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to post_amazings_path(@post), method: :post do %>
-        ♡<%= @post.amazings.count %> えらいね
-      <% end %>
-    </p>
-  <% end %>
-
 
 
 <div>
