@@ -18,6 +18,7 @@ devise_for :users,skip: [:passwords], controllers: {
    resources :greats, only: [:create, :destroy, :index]
    resources :amazings, only: [:create, :destroy, :index]
    resources :comments, only: [:create, :destroy]
+   get "search" => "searches#search"
   end
 
   resources :users, only: [:show, :edit, :update]
