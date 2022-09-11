@@ -1,0 +1,36 @@
+          <br>
+         
+          <% if post.liked_by?(current_user) %>
+              <span><%= link_to post_likes_path(post), method: :delete, remote: true do %>
+                ♥<%= post.likes.count %> いいね｜</span></a>
+              <% end %>
+            <% else %>
+             <span> <%= link_to post_likes_path(post), method: :post, remote: true do %>
+                ♡<%= post.likes.count %> いいね｜</span>
+            
+              <% end %>
+          <% end %>
+          
+         
+         <% if post.greatd_by?(current_user) %>
+         <span> <%= link_to post_greats_path(post), method: :delete, remote: true do %>
+            ♥<%= post.greats.count %> すごいね｜</span>
+         <% end %>
+        <% else %>
+          <span><%= link_to post_greats_path(post), method: :post, remote: true do %>
+            ♡<%= post.greats.count %> すごいね｜</span>
+          <% end %>
+       <% end %>
+       
+       
+      
+       <% if post.amazingd_by?(current_user) %>
+           <span><%= link_to post_amazings_path(post), method: :delete, remote: true do %>
+            ♥<%= post.amazings.count %> えらいね｜</span>
+          <% end %>
+        <% else %>
+           <span><%= link_to post_amazings_path(post), method: :post, remote: true do %>
+            ♡<%= post.amazings.count %> えらいね｜</span>
+          <% end %>
+      <% end %>
+      <span><%= link_to "詳細/コメント: #{post.comments.size}", post_path(post), class: "text-dark" %></span>

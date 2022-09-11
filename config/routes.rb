@@ -14,12 +14,16 @@ devise_for :users,skip: [:passwords], controllers: {
  scope module: :public do
   root to: 'homes#top'
   resources :posts, only: [:new, :create, :index, :show, :destroy]do
-   resources :likes, only: [:create, :destroy, :index]
-   resources :greats, only: [:create, :destroy, :index]
-   resources :amazings, only: [:create, :destroy, :index]
+   resources :likes, only: [:create, :index]
+   resource :likes, only: [:destroy]
+   resources :greats, only: [:create, :index]
+   resource :greats, only: [:destroy]
+   resources :amazings, only: [:create, :index]
+   resource :amazings, only: [:destroy]
    resources :comments, only: [:create, :destroy]
-   get "search" => "searches#search"
+   
   end
+  get "search" => "searches#search"
 
   resources :users, only: [:show, :edit, :update]
  end

@@ -1,0 +1,36 @@
+<div class="card-list-container py-5">
+<% resources.each do |resource| %>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+  <% if resource.get_image.attached? %>
+   <%= link_to post_path(resource.id) do %>
+     <%= image_tag resource.get_image, class:"card-img-top"; %>
+    <% end %>
+  <% end %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+  <!--投稿ユーザー画像-->
+         <%= image_tag resource.user.get_profile_image(60,60), class:"mt-3 rounded-circle"; %>
+        </div>
+        <div class="col-10">
+          <p class="card-text">
+             <%= resource.post %>
+          </p>
+          <span>
+           <i class="fas fa-user"></i> By <%= resource.user.name %>
+          </span>
+          <div id="like_etc-<%= resource.id %>" >
+        <%= render 'public/posts/likes_etc', post: resource %>
+       </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<div class="row">
+ <div class="col-12 d-flex justify-content-center mt-5 ">
+   <%= paginate resources %>
+ </div>
+</div>

@@ -26,9 +26,9 @@
         ♡<%= @post.likes.count %> いいね｜</span>
       <% end %>
   <% end %>
-  
-    
-  
+
+
+
     <% if @post. greatd_by?(current_user) %>
      <span> <%= link_to post_great_path(@post), method: :delete do %>
         ♥<%= @post.greats.count %> すごいね｜</span>
@@ -61,34 +61,38 @@
  <hr>
     <div class="card-body">
       <div class="row">
-        <div class="col-2">
-           <% @post.comments.each do |post_comment| %>
+        <% @post.comments.each do |post_comment| %>
+          <div class="col-2">
             <%= image_tag post_comment.user.get_profile_image(50,50) %>
-        </div>
-           <div class="col-10">
+          </div>
+          <div class="col-10">
              <p class="card-title">
               <p><%= post_comment.user.name %> | <%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
               <p><b><%= post_comment.comment %></b></p>
-           <% if post_comment.user == current_user %>
-             <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete %>
-           <% end %>
- <hr>      
-          <% end %>
+              <% if post_comment.user == current_user %>
+                <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete %>
+              <% end %>
+              <hr>
            </div>
+        <% end %>
       </div>
     </div>
+
+
+    <div class="form-group">
+  　<div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">コメントする</label>
+    <%= form_with model: [@post, @post_comment] do |f| %>
+      <%= f.text_area :comment, cols: 60, rows: '5', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する", class: "btn btn-outline-primary"%>
+    <% end %>
+  </div>
+
  </div>
 
 
 
-<div class="form-group">
-　<div class="mb-3">
-  <label for="exampleFormControlTextarea1" class="form-label">コメントする</label>
-  <%= form_with model: [@post, @post_comment] do |f| %>
-    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "送信する", class: "btn btn-outline-primary"%>
-  <% end %>
-</div>
+
     </div>
     </div>
     </div>

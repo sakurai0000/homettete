@@ -15,7 +15,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.page(params[:page]).per(10).order(created_at: :desc)
+    @posts = Post.includes(:comments).page(params[:page]).per(10).order(created_at: :desc)
   end
 
   def show
