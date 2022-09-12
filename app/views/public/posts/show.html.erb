@@ -63,7 +63,9 @@
       <div class="row">
         <% @post.comments.each do |post_comment| %>
           <div class="col-2">
+              <%= link_to user_path(post_comment.user.id) do %>
             <%= image_tag post_comment.user.get_profile_image(50,50) %>
+            <% end %>
           </div>
           <div class="col-10">
              <p class="card-title">

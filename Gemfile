@@ -61,3 +61,4 @@ gem 'jquery-rails'
 
 
 gem "net-smtp", "~> 0.3.1"
+gem 'rails-i18n'

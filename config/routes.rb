@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'relationships/followings'
+  get 'relationships/followers'
 # 管理者用
 devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
@@ -13,6 +15,11 @@ devise_for :users,skip: [:passwords], controllers: {
 
  scope module: :public do
   root to: 'homes#top'
+  resources :users, only: [:show, :edit, :update] do
+    resource :relationships, only: [:create, :destroy]
+    get 'followings' => 'relationships#followings', as: 'followings'
+    get 'followers' => 'relationships#followers', as: 'followers'
+  end
   resources :posts, only: [:new, :create, :index, :show, :destroy]do
    resources :likes, only: [:create, :index]
    resource :likes, only: [:destroy]
@@ -22,10 +29,11 @@ devise_for :users,skip: [:passwords], controllers: {
    resource :amazings, only: [:destroy]
    resources :comments, only: [:create, :destroy]
    
-  end
+ end
   get "search" => "searches#search"
+  get 'friends' => 'posts#friends'
 
-  resources :users, only: [:show, :edit, :update]
+  #resources :users, only: [:show, :edit, :update]
  end
 
 
