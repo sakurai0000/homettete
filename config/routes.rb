@@ -16,6 +16,7 @@ devise_for :users,skip: [:passwords], controllers: {
  scope module: :public do
   root to: 'homes#top'
   resources :users, only: [:show, :edit, :update] do
+    resources :notifications, only: [:index, :destroy]
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
@@ -30,6 +31,7 @@ devise_for :users,skip: [:passwords], controllers: {
    resources :comments, only: [:create, :destroy]
    
  end
+ 
   get "search" => "searches#search"
   get 'friends' => 'posts#friends'
 

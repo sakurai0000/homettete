@@ -4,7 +4,9 @@ class Public::AmazingsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     amazing = current_user.amazings.new(post_id: @post.id)
-    amazing.save
+    if amazing.save
+      @post.create_notification(current_user,"amazing")
+    end
     #redirect_to post_path(post)
   end
 

@@ -3,7 +3,9 @@ class Public::GreatsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     great = current_user.greats.new(post_id: @post.id)
-    great.save
+    if great.save
+      @post.create_notification(current_user,"great")
+    end
     #redirect_to post_path(post)
   end
 

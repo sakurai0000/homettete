@@ -11,13 +11,17 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :reports, dependent: :destroy
   
-# フォローをした、されたの関係
-has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-
-# 一覧画面で使用
-has_many :followings, through: :relationships, source: :followed
-has_many :followers, through: :reverse_of_relationships, source: :follower
+  # 通知機能用
+  has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy
+    
+  # フォローをした、されたの関係
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  
+  # 一覧画面で使用
+  has_many :followings, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :follower
   
   
 # プロフ画像用
@@ -58,6 +62,15 @@ end
   # フォローしているか判定
   def following?(user)
     followings.include?(user)
+  end
+  
+ # フォロー通知メソッド
+  def create_notification_follow(current_user)
+    notification = current_user.active_notifications.new(
+      visited_id: id, 
+      action: 'follow'
+    )
+    notification.save if notification.valid?
   end
 
 

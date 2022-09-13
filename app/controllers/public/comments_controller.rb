@@ -4,7 +4,9 @@ class Public::CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = current_user.comments.new(post_comment_params)
     comment.post_id = post.id
-    comment.save
+    if comment.save
+      post.create_notification_comment(current_user,comment.id)
+    end
     redirect_to post_path(post)
   end
 

@@ -18,7 +18,7 @@
 
 
   <% if @post. liked_by?(current_user) %>
-      <span><%= link_to post_like_path(@post), method: :delete do %>
+      <span><%= link_to post_likes_path(@post), method: :delete do %>
         ♥<%= @post.likes.count %> いいね｜</span>
       <% end %>
     <% else %>
@@ -30,7 +30,7 @@
 
 
     <% if @post. greatd_by?(current_user) %>
-     <span> <%= link_to post_great_path(@post), method: :delete do %>
+     <span> <%= link_to post_greats_path(@post), method: :delete do %>
         ♥<%= @post.greats.count %> すごいね｜</span>
       <% end %>
     <% else %>
@@ -41,7 +41,7 @@
 
 
   <% if @post. amazingd_by?(current_user) %>
-       <span><%= link_to post_amazing_path(@post), method: :delete do %>
+       <span><%= link_to post_amazings_path(@post), method: :delete do %>
         ♥<%= @post.amazings.count %> えらいね｜</span>
       <% end %>
     <% else %>
