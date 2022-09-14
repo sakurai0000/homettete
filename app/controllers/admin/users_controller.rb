@@ -1,23 +1,21 @@
-class Public::UsersController < ApplicationController
-  before_action :authenticate_user!, except: [:top]
+class Admin::UsersController < ApplicationController
+  def index
+    @users =User.page(params[:page]).per(10)
+  end
 
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page]).per(20).order(created_at: :desc)
   end
 
-  def edit
+  def destroy
     @user = User.find(params[:id])
+    @user.destroy
+    redirect_to admin_users_path
   end
 
-  def update
-    @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
-  end
 
   def user_params
     params.require(:user).permit(:name, :profile_image)
   end
-
 end

@@ -17,11 +17,11 @@ class Public::PostsController < ApplicationController
   def index
     @posts = Post.includes(:comments).page(params[:page]).per(10).order(created_at: :desc)
   end
-  
+
   def friends
    @posts = Post.where(user_id: [*current_user.following_ids]).page(params[:page]).per(10).order(created_at: :desc)
   end
-  
+
 
   def show
     @post = Post.find(params[:id])

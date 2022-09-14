@@ -1,7 +1,14 @@
-<div class="card-list-container py-5">
- <div class="card w-50 mx-auto mt-4 shadow-lg">
-<h3 class="text-center">通知</h3>
-<%#= link_to "通知削除", user_notification_path(@notifications), method: :delete ,class: "fas fa-trash" %>
+<main class="mb-auto">
+    <div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto text-center shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light py-4 mb-0">通知</h5>
+      <div class="form-body p-4">
+        <div class="mx-auto text-center">
+
+<%= link_to "通知削除", user_notifications_path, method: :delete  %>
+
+
 <% if @notifications.present? %>
     <div class="users-index">
         <%= render @notifications %>
@@ -9,5 +16,8 @@
 <% else %>
     <p>通知はありません</p>
 <% end %>
-</div>
-</div>
+        </div>
+     </div>
+     </div>
+   </div>
+ </main>

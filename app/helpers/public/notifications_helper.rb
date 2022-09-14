@@ -8,15 +8,15 @@ module Public::NotificationsHelper
     when 'follow'
       tag.a(notification.visitor.name, href: user_path(@visitor)) + 'があなたをフォローしました'
     when 'like'
-       tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'がいいねされました'
+      tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'がいいねされました'
     when 'great'
-       tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'がすごいねされました'
+      tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'がすごいねされました'
     when 'amazing'
-       tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'がえらいねされました'
+      tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'がえらいねされました'
     when 'comment' then
       @comment = Comment.find_by(id: @visitor_comment)
       @comment_content =@comment.comment
       tag.a(@visitor.name, href: user_path(@visitor)) + 'が' + tag.a("褒めて！", href: post_path(notification.post_id)) + 'にコメントしました'
-     end
+    end
   end
 end

@@ -1,5 +1,5 @@
 class Public::GreatsController < ApplicationController
-  
+  before_action :authenticate_user!, except: [:top]
   def create
     @post = Post.find(params[:post_id])
     great = current_user.greats.new(post_id: @post.id)
