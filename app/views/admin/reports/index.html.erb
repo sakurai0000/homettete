@@ -1,0 +1,32 @@
+<div class="col-md-8 offset-md-1">
+<h3>通報一覧</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>通報ID</th>
+      <th>会員名</th>
+      <th>通報者</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reports.each do |report| %>
+      <tr>
+        <td>
+          <%= link_to report.id, admin_report_path(report) %>
+        </td>
+        <td>
+          <%= report.reported.name %>
+        </td>
+        <td>
+          <%= report.reporter.name %>
+        </td>
+        <td>
+          <%= report.status_i18n %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

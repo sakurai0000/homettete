@@ -60,10 +60,15 @@
 
               <!--管理者ログインした場合-->
           <% elsif admin_signed_in? %>
-             <ul class="navbar-nav ml-auto">
-               <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link" do %>
-               <i class="fas fa-sign-out-alt"></i>ログアウト
-               <% end %>
+             <li class="nav-item">
+              <%= link_to '通報一覧', admin_reports_path, class: 'nav-link text-dark' %>
+             </li>
+             <li class="nav-item">
+              <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link text-dark' %>
+             </li>
+             <li class="navbar-nav ml-auto">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+             </li>
 
           <% else %>
           <!--ユーザーサインインしていない状態-->

@@ -14,8 +14,22 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to admin_user_path(@user), notice: "#{@user.name}さんの会員ステータスを更新しました"
+    else
+      render "edit"
+    end
+  end
+  
+
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :profile_image, :user_status)
   end
 end

@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :reports, dependent: :destroy
   
+  # 通報機能
+  has_many :reports, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
+  has_many :reverse_of_reports, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
+  
   # 通知機能用
   has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy
@@ -71,6 +75,14 @@ end
       action: 'follow'
     )
     notification.save if notification.valid?
+  end
+  
+  # ゲストログインメソッド
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
+    end
   end
 
 

@@ -7,53 +7,27 @@
       <div class="row">
         <div class="col-2">
     <%= image_tag @post.user.get_profile_image(60,60), class:"mt-3 rounded-circle"; %>
-    </div>
-  <div class="col-10">
+        </div>
+   <div class="col-10">
      <p class="card-title">
-  <%= @post.post %>
+      <%= @post.post %>
      </p>
-  <span><i class="fas fa-user"></i> By <%= @post.user.name %>｜ </span>
-  <span><i class="fa fa-calendar"></i> <%= @post.created_at.strftime('%Y/%m/%d') %>｜ </span>
+     <span>
+      <i class="fas fa-user"></i> By <%= @post.user.name %>｜ 
+     </span>
+     <span>
+       <i class="fa fa-calendar"></i> <%= @post.created_at.strftime('%Y/%m/%d') %>｜ 
+     </span>
+   <% if @post.user == current_user %>
+    <span> <%= link_to "削除",  post_path(@post), class: 'btn btn-warning', method: :delete %>
+    </span>
+    <% end %>
+   <% unless admin_signed_in? %>
+      <div id="like_etc-<%= @post.id %>" >
+       <span><%= render 'likes_etc', post: @post %>｜ </span>
+      </div>
+   <% end %>
 
-<% unless admin_signed_in? %>
-
-  <% if @post.liked_by?(current_user) %>
-      <span><%= link_to post_likes_path(@post), method: :delete do %>
-        ♥<%= @post.likes.count %> いいね｜</span>
-      <% end %>
-    <% else %>
-     <span> <%= link_to post_likes_path(@post), method: :post do %>
-        ♡<%= @post.likes.count %> いいね｜</span>
-      <% end %>
-  <% end %>
-
-
-
-    <% if @post.greatd_by?(current_user) %>
-     <span> <%= link_to post_greats_path(@post), method: :delete do %>
-        ♥<%= @post.greats.count %> すごいね｜</span>
-      <% end %>
-    <% else %>
-      <span><%= link_to post_greats_path(@post), method: :post do %>
-        ♡<%= @post.greats.count %> すごいね｜</span>
-      <% end %>
-  <% end %>
-
-
-  <% if @post.amazingd_by?(current_user) %>
-       <span><%= link_to post_amazings_path(@post), method: :delete do %>
-        ♥<%= @post.amazings.count %> えらいね｜</span>
-      <% end %>
-    <% else %>
-       <span><%= link_to post_amazings_path(@post), method: :post do %>
-        ♡<%= @post.amazings.count %> えらいね｜</span>
-      <% end %>
-  <% end %>
-<% end %>
-
-  <% if @post.user == current_user %>
-   <span> <%= link_to "削除",  post_path(@post), class: 'text-dark', method: :delete %></span>
-      <% end %>
 
  <hr>
  <div class="comments card-text">
@@ -78,7 +52,7 @@
                 <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete %>
               <% end %>
               <% if admin_signed_in? %>
-               <%= link_to '管理者の権限で削除ぉぉ', admin_post_comment_path(@post.id, post_comment.id), method: :delete %>
+               <%= link_to '管理者の権限で削除', admin_post_comment_path(@post.id, post_comment.id),class: "btn btn-warning", method: :delete %>
               <% end %>
               
               <hr>

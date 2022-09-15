@@ -22,7 +22,7 @@
 
           <span><i class="fas fa-user"></i> By <%= resource.user.name %> ｜ </span>
           <% if admin_signed_in? %>
-            <%= link_to '管理者の権限で削除ぉぉ', admin_post_path(resource.id), method: :delete %>
+            <%= link_to '管理者の権限で削除', admin_post_path(resource.id),class: "btn btn-warning", method: :delete %>
           <% end %>
           <% unless admin_signed_in? %>
             <div id="like_etc-<%= resource.id %>" >

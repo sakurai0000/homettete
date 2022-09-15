@@ -28,9 +28,27 @@ class Public::SessionsController < Devise::SessionsController
     posts_path
   end
 
-
-
   def after_sign_out_path_for(resource)
     root_path
   end
+  
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to posts_path, notice: 'ゲストユーザーとしてログインしました。'
+  end
+  
+  def user_state
+    @user = User.find_by(email: params[:user][:email])  #emailからuserを探す
+    if @user   #もしアカウントが見つかれば
+      if @user.valid_password?(params[:user][:password]) && @user.user_status
+      #@userのパスワードが有効かつ退会済み(user_status == true)ならば
+        flash[:notice] = 'お客様のアカウントは現在ご使用できません。'
+        redirect_to new_user_registration_path 
+      end
+    end
+  end
+  
+  
+  
 end
