@@ -1,18 +1,20 @@
-    <div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
+<div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
       <%= image_tag @user.get_profile_image(100,100) %>
 
   <h5 class="profile-name display-4"><%= @user.name %></h5>
-    <% if @user != current_user %>
-      <%= link_to "ユーザーを通報", new_user_report_path(@user), class: "btn btn-danger" %>
+   <% if current_user.name != "guestuser" %>
+      <% if @user != current_user %>
+        <%= link_to "ユーザーを通報", new_user_report_path(@user), class: "btn btn-danger" %>
+      <% end %>
     <% end %>
+
   
  
 <% if @user == current_user %>
-　　<% if @user.name != "guestuser" %>
+　　<% if current_user.name != "guestuser" %>
     <div class="mt4-auto">
    <p> <%= link_to "プロフィール編集", edit_user_path(@user), class:"text-dark" %></p>
     </div>
-    <% end %>
      <div class="mt4-auto">
    <p>   <%= link_to "いいね一覧",post_likes_path(@user), class:"text-dark" %></p>
    </div>
@@ -22,26 +24,28 @@
     <div class="mt4-auto">
    <p>  <%= link_to "えらいね一覧",post_amazings_path(@user.id), class:"text-dark" %></p>
    </div>
+    <% end %>
 <% end %>
     
 
 <dr>
-<% if current_user.following?(@user) %>
-<div class="mt4-auto"><p>
-  <%= link_to "フォロー外す", user_relationships_path(@user.id), class: "btn btn-danger", method: :delete %> 
-  </div></p>
-<% else %>
-<div class="mt4-auto"><p>
-  <%= link_to "フォローする", user_relationships_path(@user.id), class: "btn btn-warning", method: :post %> 
-  </div></p>
+ <% if current_user.name != "guestuser" %>
+    <% if current_user.following?(@user) %>
+    <div class="mt4-auto"><p>
+      <%= link_to "フォロー外す", user_relationships_path(@user.id), class: "btn btn-danger", method: :delete %> 
+      </div></p>
+    <% else %>
+    <div class="mt4-auto"><p>
+      <%= link_to "フォローする", user_relationships_path(@user.id), class: "btn btn-warning", method: :post %> 
+      </div></p>
+    <% end %>
 <% end %>
-
 
 <div class="mt4-auto">
  <p><%= link_to "フォロー数: #{ @user.followings.count }",user_followings_path(@user), class: "text-warning" %></p></div>
  <div class="mt4-auto">
  <p><%= link_to "フォロワー数: #{ @user.followers.count }",user_followers_path(@user), class: "text-warning" %></p></div>
- </div>
+</div>
 
 
 

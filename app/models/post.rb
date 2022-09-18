@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  validates :post, {length: {in: 1..200} }
+
   has_one_attached :image
   belongs_to :user
   has_many :amazings, dependent: :destroy
@@ -17,7 +19,7 @@ class Post < ApplicationRecord
     #end
     image
   end
-  
+
   def liked_by?(user)
     likes.exists?(user_id: user.id)
   end
@@ -25,11 +27,11 @@ class Post < ApplicationRecord
   def greatd_by?(user)
     greats.exists?(user_id: user.id)
   end
-  
+
   def amazingd_by?(user)
     amazings.exists?(user_id: user.id)
   end
-  
+
   # サーチ用メソッド
   def self.looks(search, word)
     if search == "perfect_match"
@@ -44,12 +46,12 @@ class Post < ApplicationRecord
       @post = Post.all
     end
   end
-  
+
   # いいね通知用メソッド
   def create_notification(current_user,type)
     notification = current_user.active_notifications.new(
       comment_id: nil,
-      post_id: id,      
+      post_id: id,
       visited_id: user_id,
       action: type
       )
@@ -58,15 +60,16 @@ class Post < ApplicationRecord
     end
     notification.save if notification.valid?
   end
-  
 
-  
-  
+
+
+
   # コメント通知用メソッド
   def create_notification_comment(current_user, comment_id)
-    temp_ids = Comment.where(post_id: id).select(:user_id).where.not("user_id = ? or user_id = ?", current_user.id, user_id).distinct 
+    #byebug
+    temp_ids = Comment.where(post_id: id).select(:user_id).where.not("user_id = ? or user_id = ?", current_user.id, user_id).distinct
     temp_ids.each do |temp_id|
-      save_notification_comment!(current_user, comment_id, temp_id['user_id'])
+      save_notification_comment(current_user, comment_id, temp_id['user_id'])
     end
     save_notification_comment(current_user, comment_id, user_id)
   end
@@ -83,8 +86,8 @@ class Post < ApplicationRecord
     end
     notification.save if notification.valid?
   end
-  
-  
-  
+
+
+
 
 end

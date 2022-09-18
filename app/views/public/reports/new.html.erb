@@ -5,6 +5,16 @@
      <h5 class="text-dark bg-light py-4 mb-0">通報</h5>
       <div class="form-body p-4">
         <div class="mx-auto text-center">
+          <% if @report.errors.any? %>
+         <ul class="alert alert-danger" role="alert">
+            <h6 class="alert-heading">
+            <%= @report.errors.count %>件のエラーが発生しました
+            </h6>
+            <% @report.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+         </ul>
+        <% end %>
 
 <%= form_with model:[@user, @report] do |f| %>
   <div class="form-group">
@@ -14,11 +24,11 @@
     </div>
     <br>
     <div class="field">
-    <%= f.label :"違反URL" %>
-    <%= f.text_field :url, class:"form-control mt-2" %>
+     <%= f.label :"違反URL" %>
+     <%= f.text_field :url, class:"form-control mt-2" %>
     </div>
     <div class="actions mt-4">
-    <%= f.submit "通報する", class: "btn btn-danger" %>
+     <%= f.submit "通報する", class: "btn btn-danger" %>
   </div>
 <% end %>
 

@@ -13,10 +13,10 @@
       <%= @post.post %>
      </p>
      <span>
-      <i class="fas fa-user"></i> By <%= @post.user.name %>｜ 
+      <i class="fas fa-user"></i> By <%= @post.user.name %>｜
      </span>
      <span>
-       <i class="fa fa-calendar"></i> <%= @post.created_at.strftime('%Y/%m/%d') %>｜ 
+       <i class="fa fa-calendar"></i> <%= @post.created_at.strftime('%Y/%m/%d') %>｜
      </span>
    <% if @post.user == current_user %>
     <span> <%= link_to "削除",  post_path(@post), class: 'btn btn-warning', method: :delete %>
@@ -24,7 +24,7 @@
     <% end %>
    <% unless admin_signed_in? %>
       <div id="like_etc-<%= @post.id %>" >
-       <span><%= render 'likes_etc', post: @post %>｜ </span>
+       <span><%= render 'public/posts/likes_etc', post: @post %>｜ </span>
       </div>
    <% end %>
 
@@ -54,24 +54,36 @@
               <% if admin_signed_in? %>
                <%= link_to '管理者の権限で削除', admin_post_comment_path(@post.id, post_comment.id),class: "btn btn-warning", method: :delete %>
               <% end %>
-              
+
               <hr>
            </div>
         <% end %>
       </div>
     </div>
 
-    <% unless admin_signed_in? %>
-      <div class="form-group">
-      　<div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">コメントする</label>
-          <%= form_with model: [@post, @post_comment] do |f| %>
-            <%= f.text_area :comment, cols: 60, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "送信する", class: "btn btn-outline-primary"%>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+      <% if current_user.name != "guestuser" %>
+        <% unless admin_signed_in? %>
+          <div class="form-group">
+            <div class="mb-3">
+             <% if @post_comment.errors.any? %>
+               <ul class="alert alert-danger" role="alert">
+               <h6 class="alert-heading">
+                <%= @post_comment.errors.count %>件のエラーが発生しました
+               </h6>
+                 <% @post_comment.errors.full_messages.each do |message| %>
+               <li><%= message %></li>
+                 <% end %>
+             <% end %>
+
+              <label for="exampleFormControlTextarea1" class="form-label">コメントする</label>
+              <%= form_with model: [@post, @post_comment] do |f| %>
+                <%= f.text_area :comment, cols: 60, rows: '5', placeholder: "コメントをここに" %>
+                <%= f.submit "送信する", class: "btn btn-outline-primary"%>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
 
 
 

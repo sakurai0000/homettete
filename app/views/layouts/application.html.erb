@@ -20,7 +20,7 @@
                     <%= f.text_field :word %>
                     <%= f.select :range, options_for_select([['User'], ['Post']]) %>
                     <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
-                    <%= f.submit "検索", class: "btn btn-primary" %>
+                    <%= f.submit "検索", class: "btn btn-info" %>
                   <% end %>
                 </div>
                 <% end %>
@@ -40,6 +40,9 @@
              <li class="nav-item">
               <%= link_to 'みんなの褒めて', posts_path, class: 'nav-link text-dark' %>
              </li>
+             
+             <!--ゲストログインした場合-->
+            <% if current_user.name != "guestuser" %>
               <li class="nav-item">
                <%= link_to 'ともだちの褒めて', friends_path, class: 'nav-link text-dark' %>
               </li>
@@ -50,6 +53,7 @@
               <%= link_to user_notifications_path(current_user.id), class: 'nav-link text-dark' do %>
                 <i class="fas fa-bell"></i> 通知
               <% end %>
+            <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
@@ -87,7 +91,14 @@
     </header>
     <main class="mb-auto">
     <%= yield %>
-
+        <span id="back">
+          <a href="#">
+            <img src="img/arrow.png" alt="">
+          </a>
+        </span>
+    
+        <script src="js/jquery.min.js"></script>
+        <script src="js/script.js"></script>
     </main>
     <footer class="bg-dark text-white pt-5 pb-4">
       <div class="container">
