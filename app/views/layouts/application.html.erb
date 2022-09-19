@@ -40,7 +40,7 @@
              <li class="nav-item">
               <%= link_to 'みんなの褒めて', posts_path, class: 'nav-link text-dark' %>
              </li>
-             
+
              <!--ゲストログインした場合-->
             <% if current_user.name != "guestuser" %>
               <li class="nav-item">
@@ -92,13 +92,12 @@
     <main class="mb-auto">
     <%= yield %>
         <span id="back">
-          <a href="#">
-            <img src="img/arrow.png" alt="">
-          </a>
+          <button>
+           <%= image_tag 'arrow.png' %>
+          </button>
         </span>
-    
-        <script src="js/jquery.min.js"></script>
-        <script src="js/script.js"></script>
+
+
     </main>
     <footer class="bg-dark text-white pt-5 pb-4">
       <div class="container">
@@ -107,6 +106,13 @@
             <p>褒められたい・褒めたい人の優しいSNS</p>
             <%= image_tag('logo-white.png') %>
           </div>
+           <div class="col-md-2">
+            <h6 class="text-white mt-2 mb-3">LINEスタンプ発売中♪</h6>
+            <p>読み込むorクリック➡</p>
+            </div>
+            <div class="col-md-4">
+            <a class="navbar-brand" href="https://line.me/S/sticker/20800834"><%= image_tag('QR_564489.png') %></a>
+            </div>
         </div>
       </div>
     </footer>

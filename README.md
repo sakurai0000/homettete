@@ -21,12 +21,6 @@
 また、ボタンだけじゃ伝えきれない溢れる思いはコメントとして残すこともできます！
 
 ## 設計書
-［ER図］(https://drive.google.com/file/d/1IqMlP3WuEIPXoDl819kYmO5or88aCKRa/view?usp=sharing)
-
-［画面イメージ］（https://docs.google.com/presentation/d/1alV2cpukVpoJ3Oib_ho27ykW29tAk9HXwd1o55Y8TEg/edit?usp=sharing）
-
-［テーブル定義書（https://docs.google.com/spreadsheets/d/10UxDXkoOoUqaMau2OlTt6WnmXput54ZR/edit?usp=sharing&ouid=115244356469602539851&rtpof=true&sd=true）
-
 
 ## 開発環境
 - OS：Linux(CentOS)

@@ -39,12 +39,13 @@
       <%= link_to "フォローする", user_relationships_path(@user.id), class: "btn btn-warning", method: :post %> 
       </div></p>
     <% end %>
-<% end %>
+
 
 <div class="mt4-auto">
  <p><%= link_to "フォロー数: #{ @user.followings.count }",user_followings_path(@user), class: "text-warning" %></p></div>
  <div class="mt4-auto">
  <p><%= link_to "フォロワー数: #{ @user.followers.count }",user_followers_path(@user), class: "text-warning" %></p></div>
+<% end %>
 </div>
 
 

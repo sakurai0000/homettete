@@ -1,2 +1,107 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import './skippr.css';
+
+.image1 {
+  background-image: url('../images/ageage1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.image2 {
+  background-image: url('../images/ageage2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.image3 {
+  background-image: url('../images/ageage3.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.image4 {
+  background-image: url('../images/ageage4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.image5 {
+  background-image: url('../images/ageage5.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.image6 {
+  background-image: url('../images/ageage6.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.image7 {
+  background-image: url('../images/ageage7.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+#tall {
+  width: 800px;
+  height: 600px;
+}
+
+.skippr-next {
+    right: 3.5%;
+    transform: rotate(-45deg);
+    border-bottom: 5px solid rgba(0,0,0,0.8);
+    border-right: 5px solid rgba(0,0,0,0.8);
+}
+
+.skippr-previous {
+    left: 2.5%;
+    transform: rotate(-45deg);
+    border-top: 5px solid rgba(0,0,0,0.8);
+    border-left: 5px solid rgba(0,0,0,0.8);
+}
+
+.skippr-nav-element-bubble {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 4px;
+}
+
+.skippr-nav-element {
+    cursor: pointer;
+    float: left;
+    background-color: rgba(0,0,0,0.5);
+    transition: all .25s linear;
+}
+
+#back button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+
+.box {
+  height: 300px;
+  width: 600px;
+  margin: 0 auto 50px;
+  background-color: #eee;
+}
+#back {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+#back img {
+  width: 50px;
+}
