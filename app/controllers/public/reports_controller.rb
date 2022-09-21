@@ -1,5 +1,4 @@
 class Public::ReportsController < ApplicationController
-  
   def new
     @report = Report.new
     @user = User.find(params[:user_id])
@@ -18,8 +17,7 @@ class Public::ReportsController < ApplicationController
   end
 
   private
-
-  def report_params
-    params.require(:report).permit(:reason, :url).merge({status: 0})
-  end
+    def report_params
+      params.require(:report).permit(:reason, :url).merge({ status: 0 })
+    end
 end

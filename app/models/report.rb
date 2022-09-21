@@ -1,10 +1,10 @@
 class Report < ApplicationRecord
-  validates :reason, {length: {in: 1..400} }
-  validates :url, {presence: true}
+  validates :reason, { length: { in: 1..400 } }
+  validates :url, { presence: true }
 
-  
+
   belongs_to :reporter, class_name: "User"
   belongs_to :reported, class_name: "User"
-  
+
   enum status: { waiting: 0, keep: 1, finish: 2 }
 end

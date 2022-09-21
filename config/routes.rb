@@ -1,57 +1,54 @@
 Rails.application.routes.draw do
-
-
-  #get 'relationships/followings'
-  #get 'relationships/followers'
- devise_scope :user do
-   post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
- end
-
-# 管理者用
-devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
- sessions: "admin/sessions"
-}
-
-# 顧客用
-devise_for :users,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
-}
-
-namespace :admin do
- resources :users, only: [:show, :edit, :update, :index, :destroy]
- resources :reports, only: [:index, :show, :update]
- resources :posts, only: [:new, :create, :index, :show, :destroy] do
-  resources :comments, only: [:destroy]
- end
-end
-
- scope module: :public do
-  root to: 'homes#top'
-  resources :users, only: [:show, :edit, :update] do
-    resources :reports, only: [:new, :create]
-    resource :notifications, only: [:destroy]
-    resources :notifications, only: [:index]
-    resource :relationships, only: [:create, :destroy]
-    get 'followings' => 'relationships#followings', as: 'followings'
-    get 'followers' => 'relationships#followers', as: 'followers'
+  # get 'relationships/followings'
+  # get 'relationships/followers'
+  devise_scope :user do
+    post "users/guest_sign_in", to: "public/sessions#guest_sign_in"
   end
-  resources :posts, only: [:new, :create, :index, :show, :destroy] do
-    resources :likes, only: [:create, :index]
-    resource :likes, only: [:destroy]
-    resources :greats, only: [:create, :index]
-    resource :greats, only: [:destroy]
-    resources :amazings, only: [:create, :index]
-    resource :amazings, only: [:destroy]
-    resources :comments, only: [:create, :destroy]
 
- end
+  # 管理者用
+  devise_for :admins, skip: [:registrations, :passwords], controllers: {
+   sessions: "admin/sessions"
+  }
 
-  get "search" => "searches#search"
-  get 'friends' => 'posts#friends'
+  # 顧客用
+  devise_for :users, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: "public/sessions"
+  }
 
-  #resources :users, only: [:show, :edit, :update]
- end
+  namespace :admin do
+    resources :users, only: [:show, :edit, :update, :index, :destroy]
+    resources :reports, only: [:index, :show, :update]
+    resources :posts, only: [:new, :create, :index, :show, :destroy] do
+      resources :comments, only: [:destroy]
+    end
+  end
+
+  scope module: :public do
+    root to: "homes#top"
+    resources :users, only: [:show, :edit, :update] do
+      resources :reports, only: [:new, :create]
+      resource :notifications, only: [:destroy]
+      resources :notifications, only: [:index]
+      resource :relationships, only: [:create, :destroy]
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
+    end
+    resources :posts, only: [:new, :create, :index, :show, :destroy] do
+     resources :likes, only: [:create, :index]
+     resource :likes, only: [:destroy]
+     resources :greats, only: [:create, :index]
+     resource :greats, only: [:destroy]
+     resources :amazings, only: [:create, :index]
+     resource :amazings, only: [:destroy]
+     resources :comments, only: [:create, :destroy]
+   end
+
+    get "search" => "searches#search"
+    get "friends" => "posts#friends"
+
+    # resources :users, only: [:show, :edit, :update]
+  end
 
 
 

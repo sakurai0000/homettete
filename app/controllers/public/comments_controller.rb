@@ -5,7 +5,7 @@ class Public::CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @post_comment = current_user.comments.new(post_comment_params)
     @post_comment.post_id = @post.id
-    #byebug
+    # byebug
     if @post_comment.save
       @post.create_notification_comment(current_user, @post_comment.id)
       redirect_to post_path(@post)
@@ -23,5 +23,4 @@ class Public::CommentsController < ApplicationController
   def post_comment_params
     params.require(:comment).permit(:comment)
   end
-
 end

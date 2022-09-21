@@ -1,5 +1,4 @@
 class Public::PostsController < ApplicationController
-
   def new
     @post = Post.new
   end
@@ -19,7 +18,7 @@ class Public::PostsController < ApplicationController
   end
 
   def friends
-   @posts = Post.where(user_id: [*current_user.following_ids]).page(params[:page]).per(10).order(created_at: :desc)
+    @posts = Post.where(user_id: [*current_user.following_ids]).page(params[:page]).per(10).order(created_at: :desc)
   end
 
 
@@ -37,5 +36,4 @@ class Public::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:post, :image)
   end
-
 end
