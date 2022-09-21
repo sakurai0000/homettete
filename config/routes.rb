@@ -8,7 +8,8 @@ Rails.application.routes.draw do
  end
 
 # 管理者用
-devise_for :admins, skip: [:registrations, :passwords] ,controllers: {
+devise_for :admins, skip: [:passwords] ,controllers: {
+ registrations: "admin/registrations",
  sessions: "admin/sessions"
 }
 
