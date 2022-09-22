@@ -10,6 +10,11 @@ class Admin::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_posts_path
+    redirect_to admin_user_path(@post.user)
+  end
+  
+  
+  def post_params
+    params.require(:post).permit(:post, :image)
   end
 end

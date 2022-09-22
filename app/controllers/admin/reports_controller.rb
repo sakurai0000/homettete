@@ -5,7 +5,8 @@ class Admin::ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])  # 特定の通報IDを取得
-    @user = User.find(params[:id])
+    @user = @report.reported
+    
   end
 
   def update

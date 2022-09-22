@@ -33,10 +33,10 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join("app/assets/images/no_image.png")
-      profile_image.attach(io: File.open(file_path), filename: "default-image.png", content_type: "image/png")
+      file_path = Rails.root.join('app/assets/images/no_image.jpg')
+      profile_image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
-    profile_image.variant(gravity: :center, resize: "#{width}x#{height}^", crop: "#{width}x#{height}+0+0").processed
+      profile_image.variant(gravity: :center, resize: "#{width}x#{height}^", crop: "#{width}x#{height}+0+0").processed
   end
 
   # サーチ機能
@@ -70,9 +70,9 @@ class User < ApplicationRecord
   end
 
   # フォロー通知メソッド
-  def create_notification_follow(current_user)
+  def create_notification_follow(current_user, visited_id)
     notification = current_user.active_notifications.new(
-      visited_id: id,
+      visited_id: visited_id,
       action: "follow"
     )
     notification.save if notification.valid?

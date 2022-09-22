@@ -66,7 +66,6 @@ gem "kaminari"
 gem "jquery-rails"
 
 
-gem "rails-i18n"
 gem "enum_help"
 gem "dotenv-rails"
 group :production do
@@ -76,3 +75,4 @@ end
 gem "net-smtp", "~> 0.3.1"
 gem "net-pop"
 gem "net-imap"
+gem 'rails-i18n', '~> 6.0.0'

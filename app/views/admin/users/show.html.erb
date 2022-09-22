@@ -5,12 +5,6 @@
 
 
    <div class="mt4-auto">
-      <p><%= link_to "フォロー数: #{ @user.followings.count }",user_followings_path(@user), class: "text-warning" %></p>
-   </div>
-   <div class="mt4-auto">
-     <p><%= link_to "フォロワー数: #{ @user.followers.count }",user_followers_path(@user), class: "text-warning" %></p>
-   </div>
-   <div class="mt4-auto">
       <%= link_to '管理者の権限で削除', admin_user_path(@user), class: "btn btn-warning",method: :delete %>
    </div>
    
@@ -27,5 +21,33 @@
 </div>
 
 
-<%= render 'public/users/list', resources: @posts %>
+<div class="card-list-container py-5">
+  <% @posts.each do |resource| %>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <%#= 画像を投稿しなかった場合、画像を表示しない %>
+    <% if resource.get_image.attached? %>
+     <%= link_to admin_post_path(resource.id) do %>
+      <%= image_tag resource.get_image, class:"card-img-top"; %>
+     <% end %>
+    <% end %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <%= image_tag resource.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+        </div>
+        <div class="col-10">
+          <p class="card-text">
+            <%= link_to(admin_post_path(resource.id), class:"text-dark") do %>
+            <%= resource.post %>
+            <% end %>
+          </p>
+          <span><i class="fas fa-user"></i> By <%= resource.user.name %> ｜ </span>
+            <%= link_to '管理者の権限で削除', admin_post_path(resource.id),class: "btn btn-warning", method: :delete %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
 

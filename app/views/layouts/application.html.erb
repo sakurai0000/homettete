@@ -42,7 +42,7 @@
              </li>
 
              <!--ゲストログインした場合-->
-            <% if current_user.name != "guestuser" %>
+           <% if current_user.name != "guestuser" %>
               <li class="nav-item">
                <%= link_to 'ともだちの褒めて', friends_path, class: 'nav-link text-dark' %>
               </li>
@@ -53,7 +53,7 @@
               <%= link_to user_notifications_path(current_user.id), class: 'nav-link text-dark' do %>
                 <i class="fas fa-bell"></i> 通知
               <% end %>
-            <% end %>
+           <% end %>
               </li>
               <li class="nav-item">
                 <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
@@ -61,9 +61,8 @@
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
               </li>
-
               <!--管理者ログインした場合-->
-          <% elsif admin_signed_in? %>
+        <% elsif admin_signed_in? %>
              <li class="nav-item">
               <%= link_to '通報一覧', admin_reports_path, class: 'nav-link text-dark' %>
              </li>
@@ -73,8 +72,7 @@
              <li class="navbar-nav ml-auto">
               <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
              </li>
-
-          <% else %>
+        <% else %>
           <!--ユーザーサインインしていない状態-->
             <li class="nav-item">
               <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
@@ -82,15 +80,20 @@
             <li class="nav-item">
               <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
             </li>
-             <% end %>
+        <% end %>
             </ul>
           </div>
         </div>
-
       </nav>
     </header>
     <main class="mb-auto">
+      <div class="col-md-6 mx-auto mt-5">
+          <% if flash[:notice] %>
+           <p class="text-success"><%= flash[:notice] %></p>
+         <% end %>
+     </div>
     <%= yield %>
+
         <span id="back">
           <button>
            <%= image_tag 'arrow.png' %>

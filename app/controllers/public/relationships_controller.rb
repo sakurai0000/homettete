@@ -2,7 +2,7 @@ class Public::RelationshipsController < ApplicationController
   before_action :authenticate_user!, except: [:top]
   def create
     current_user.follow(params[:user_id])
-    current_user.create_notification_follow(current_user)
+    current_user.create_notification_follow(current_user, params[:user_id])
     redirect_to request.referer
   end
 

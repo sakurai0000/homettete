@@ -23,12 +23,11 @@
    <% if @post.user == current_user %>
     <span> <%= link_to "削除",  post_path(@post), class: 'btn btn-warning', method: :delete %>
     </span>
-    <% end %>
-   <% unless admin_signed_in? %>
+   <% end %>
       <div id="like_etc-<%= @post.id %>" >
        <span><%= render 'public/posts/likes_etc', post: @post %>｜ </span>
       </div>
-   <% end %>
+   
 
 
  <hr>
@@ -48,15 +47,9 @@
              <p class="card-title">
               <p><%= post_comment.user.name %> | <%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
               <p><b><%= post_comment.comment %></b></p>
-
-
               <% if post_comment.user == current_user %>
                 <%= link_to "削除", post_comment_path(post_comment.post, post_comment), method: :delete %>
               <% end %>
-              <% if admin_signed_in? %>
-               <%= link_to '管理者の権限で削除', admin_post_comment_path(@post.id, post_comment.id),class: "btn btn-warning", method: :delete %>
-              <% end %>
-
               <hr>
            </div>
         <% end %>
@@ -64,7 +57,6 @@
     </div>
 
       <% if current_user.name != "guestuser" %>
-        <% unless admin_signed_in? %>
           <div class="form-group">
             <div class="mb-3">
              <% if @post_comment.errors.any? %>
@@ -84,10 +76,7 @@
               <% end %>
             </div>
           </div>
-        <% end %>
       <% end %>
-
-
 
 
     </div>
