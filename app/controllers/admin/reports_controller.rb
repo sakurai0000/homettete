@@ -1,6 +1,6 @@
 class Admin::ReportsController < ApplicationController
   def index
-    @reports = Report.all  # 全ての通報を取得
+    @reports = Report.all.page(params[:page]).per(10).order(created_at: :desc)  # 全ての通報を取得
   end
 
   def show

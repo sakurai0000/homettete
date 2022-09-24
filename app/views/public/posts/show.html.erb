@@ -27,7 +27,7 @@
       <div id="like_etc-<%= @post.id %>" >
        <span><%= render 'public/posts/likes_etc', post: @post %>｜ </span>
       </div>
-   
+
 
 
  <hr>
@@ -55,7 +55,7 @@
         <% end %>
       </div>
     </div>
-
+     <% unless admin_signed_in? %>
       <% if current_user.name != "guestuser" %>
           <div class="form-group">
             <div class="mb-3">
@@ -77,6 +77,7 @@
             </div>
           </div>
       <% end %>
+     <% end %>
 
 
     </div>
