@@ -14,6 +14,7 @@ module Homettete
     config.i18n.load_path += Dir[Rails.root.join("config/locales/*.yml").to_s]
     I18n.config.available_locales = :ja
     I18n.config.default_locale = :ja
+    config.time_zone = 'Tokyo'
 
     # Configuration for the application, engines, and railties goes here.
     #
