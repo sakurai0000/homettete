@@ -28,7 +28,11 @@
 - Rubocop
 
 ## 使用素材
-Font Awesome
+- Font Awesome
+- いらすと屋
+- 写真AC
+
+
 
 ## 学習中の書籍
 - 確かな力が身につくJavaScript「超」入門 第2版
